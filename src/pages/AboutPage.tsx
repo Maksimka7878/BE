@@ -7,26 +7,26 @@ export function AboutPage() {
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase tracking-wide mb-8">
           О КОМПАНИИ
         </h1>
-        
+
         {/* Hero Image */}
         <div className="w-full h-[250px] md:h-[400px] bg-gray-100 mb-12 overflow-hidden rounded-lg">
           <img
-            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80"
+            src="/images/about-hero.webp"
             alt="BEFREE Store"
             className="w-full h-full object-cover"
           />
         </div>
-        
+
         {/* Company Info */}
         <div className="space-y-8 mb-12">
           <div className="prose prose-sm max-w-none text-gray-600">
             <p className="text-lg md:text-xl leading-relaxed">
-              BEFREE — это российский fashion-бренд, созданный для молодых и свободных людей, 
-              которые ценят стиль, качество и доступность. С момента основания в 2005 году 
+              BEFREE — это российский fashion-бренд, созданный для молодых и свободных людей,
+              которые ценят стиль, качество и доступность. С момента основания в 2005 году
               мы стремимся сделать модную одежду доступной для каждого.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-y border-gray-100">
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2">500+</div>
@@ -42,20 +42,20 @@ export function AboutPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Mission */}
         <div className="bg-[#f8f8f8] p-6 md:p-10 mb-12 rounded-lg">
           <h2 className="text-xl md:text-2xl font-bold uppercase tracking-wide mb-4">Наша миссия</h2>
           <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-            Мы создаём одежду, которая помогает людям выражать свою индивидуальность и чувствовать себя уверенно. 
+            Мы создаём одежду, которая помогает людям выражать свою индивидуальность и чувствовать себя уверенно.
             Наша цель — вдохновлять на смелые решения и поддерживать стремление к свободе самовыражения.
           </p>
         </div>
-        
+
         {/* Values */}
         <div className="space-y-6">
           <h2 className="text-xl md:text-2xl font-bold uppercase tracking-wide">Наши ценности</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-6 border border-gray-100 rounded-lg hover:border-gray-300 transition-colors">
               <h3 className="font-bold uppercase mb-2 text-lg">Свобода</h3>
@@ -63,21 +63,21 @@ export function AboutPage() {
                 Мы верим, что каждый человек имеет право быть собой. Наша одежда помогает раскрыть индивидуальность.
               </p>
             </div>
-            
+
             <div className="p-6 border border-gray-100 rounded-lg hover:border-gray-300 transition-colors">
               <h3 className="font-bold uppercase mb-2 text-lg">Качество</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Мы используем только качественные материалы и следим за каждым этапом производства.
               </p>
             </div>
-            
+
             <div className="p-6 border border-gray-100 rounded-lg hover:border-gray-300 transition-colors">
               <h3 className="font-bold uppercase mb-2 text-lg">Доступность</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Мода должна быть доступной. Мы предлагаем стильную одежду по честным ценам.
               </p>
             </div>
-            
+
             <div className="p-6 border border-gray-100 rounded-lg hover:border-gray-300 transition-colors">
               <h3 className="font-bold uppercase mb-2 text-lg">Ответственность</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -86,7 +86,7 @@ export function AboutPage() {
             </div>
           </div>
         </div>
-        
+
         {/* CTA */}
         <div className="mt-12 text-center">
           <Link
