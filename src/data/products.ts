@@ -64,196 +64,127 @@ export const menCategories: Category[] = [
   { id: 'm6', name: 'рубашки', slug: 'rubashki', image: '/images/cat-men-shirts.webp', gender: 'men' },
 ];
 
-// Women's products - exact from befree.ru
-export const womenProducts: Product[] = [
-  {
-    id: 'BF2611414030-60',
-    name: 'Платье мини атласное асимметричное с кружевом',
-    price: 2999,
-    image: '/images/prod-dress-atlas.webp',
-    colors: 5,
-    badge: 'hit',
-    category: 'platya',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    description: 'Женское платье мини приталенного кроя из тонкой гладкой атласной ткани. Глубокий V-образный вырез декольте, низкая линия спинки, кружевная отделка.',
-    composition: 'полиэстер 100%',
-    care: ['Бережная стирка при максимальной температуре 30ºС', 'Не отбеливать', 'Машинная сушка запрещена', 'Глажение при 110ºС'],
+// Women's products - 50 per category
+const womenProductTemplates: Record<string, { names: string[]; images: string[]; priceRange: [number, number] }> = {
+  'verkhnaya-odezhda': {
+    names: ['Пальто шерстяное двубортное', 'Куртка стеганая укороченная', 'Тренч классический', 'Пуховик длинный', 'Бомбер атласный', 'Жилет дутый', 'Парка с капюшоном', 'Дубленка короткая', 'Шуба из искусственного меха', 'Ветровка легкая'],
+    images: ['/images/cat-women-outerwear.webp', '/images/hero-layers.webp'],
+    priceRange: [5999, 15999],
   },
-  {
-    id: 'BF2611414030-50',
-    name: 'Платье мини атласное асимметричное с кружевом',
-    price: 2999,
-    image: '/images/prod-dress-atlas-2.webp',
-    colors: 5,
-    badge: 'hit',
-    category: 'platya',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+  'bryuki': {
+    names: ['Брюки кожаные прямые', 'Брюки палаццо', 'Брюки классические зауженные', 'Брюки карго', 'Брюки с высокой посадкой', 'Леггинсы спортивные', 'Брюки широкие плиссированные', 'Кюлоты', 'Брюки бананы', 'Брюки капри'],
+    images: ['/images/prod-pants-leather.webp', '/images/cat-women-pants.webp'],
+    priceRange: [2499, 5999],
   },
-  {
-    id: 'BF2611414030-77',
-    name: 'Платье мини атласное асимметричное с кружевом',
-    price: 2999,
-    image: '/images/prod-dress-atlas-3.webp',
-    colors: 5,
-    badge: 'hit',
-    category: 'platya',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+  'vyazanyy-trikotazh': {
+    names: ['Кардиган вязаный оверсайз', 'Свитер с высоким воротом', 'Джемпер укороченный', 'Пуловер с V-образным вырезом', 'Жилет вязаный', 'Водолазка базовая', 'Свитер с косами', 'Кофта на пуговицах', 'Топ вязаный', 'Кардиган длинный'],
+    images: ['/images/cat-women-knitwear.webp'],
+    priceRange: [2499, 4999],
   },
-  {
-    id: 'BF2611414030-20',
-    name: 'Платье мини атласное асимметричное с кружевом',
-    price: 2999,
-    image: '/images/prod-dress-atlas-4.webp',
-    colors: 5,
-    badge: 'hit',
-    category: 'platya',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+  'dzhinsy': {
+    names: ['Джинсы прямые с высокой посадкой', 'Джинсы скинни', 'Джинсы мом', 'Джинсы бойфренд', 'Джинсы клеш', 'Джинсы широкие', 'Джинсы с разрезами', 'Джинсы укороченные', 'Джинсы с потертостями', 'Джинсы слим'],
+    images: ['/images/cat-women-jeans.webp'],
+    priceRange: [2999, 4999],
   },
-  {
-    id: 'BF2611308006',
-    name: 'Пояс для чулок кружевной на завязках',
-    price: 2299,
-    image: '/images/prod-belt.webp',
-    colors: 2,
-    badge: 'new',
-    category: 'zen-aksessuary',
-    sizes: ['ONE SIZE'],
+  'yubki': {
+    names: ['Юбка мини плиссированная', 'Юбка миди А-силуэта', 'Юбка макси', 'Юбка-карандаш', 'Юбка джинсовая', 'Юбка с запахом', 'Юбка-шорты', 'Юбка кожаная', 'Юбка в складку', 'Юбка с принтом'],
+    images: ['/images/cat-women-skirts.webp', '/images/cat-women-dresses.webp'],
+    priceRange: [1999, 3999],
   },
-  {
-    id: 'BF2611209012',
-    name: 'Джинсы прямые с высокой посадкой',
-    price: 3999,
-    image: '/images/cat-women-jeans.webp',
-    colors: 3,
-    badge: 'hit',
-    category: 'dzhinsy',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+  'platya': {
+    names: ['Платье мини атласное асимметричное с кружевом', 'Платье миди с поясом', 'Платье макси в пол', 'Платье-комбинация', 'Платье трикотажное', 'Платье-рубашка', 'Платье с открытой спиной', 'Платье вечернее', 'Платье-футляр', 'Сарафан летний'],
+    images: ['/images/prod-dress-atlas.webp', '/images/prod-dress-atlas-2.webp', '/images/prod-dress-atlas-3.webp', '/images/prod-dress-atlas-4.webp', '/images/cat-women-dresses.webp'],
+    priceRange: [2499, 5999],
   },
-  {
-    id: 'BF2616686001',
-    name: 'Лоферы кожаные на низком каблуке',
-    price: 5999,
-    image: '/images/prod-loafers.webp',
-    colors: 2,
-    badge: null,
-    category: 'zen-aksessuary',
-    sizes: ['36', '37', '38', '39', '40'],
+  'yng': {
+    names: ['Худи оверсайз с принтом', 'Свитшот укороченный', 'Костюм спортивный', 'Топ укороченный', 'Джоггеры', 'Лонгслив базовый', 'Бомбер молодежный', 'Футболка с графикой', 'Шорты спортивные', 'Олимпийка'],
+    images: ['/images/cat-women-yng.webp', '/images/hero-w-yng.webp'],
+    priceRange: [1499, 3499],
   },
-  {
-    id: 'BF2611308015',
-    name: 'Брюки кожаные прямые',
-    price: 4999,
-    image: '/images/prod-pants-leather.webp',
-    colors: 2,
-    badge: 'new',
-    category: 'bryuki',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+  'domashnyaya-odezhda': {
+    names: ['Пижама шелковая с кружевом', 'Халат махровый', 'Комплект для сна', 'Ночная сорочка', 'Пижама хлопковая', 'Домашние брюки', 'Топ для сна', 'Халат атласный', 'Пижама с принтом', 'Костюм домашний'],
+    images: ['/images/hero-zen-sale.webp', '/images/hero-zen-home.webp'],
+    priceRange: [1999, 4999],
   },
-  {
-    id: 'BF2611414100',
-    name: 'Юбка мини плиссированная',
-    price: 2499,
-    image: '/images/cat-women-skirts.webp',
-    colors: 4,
-    badge: 'hit',
-    category: 'yubki',
-    sizes: ['XS', 'S', 'M', 'L'],
+  'co-ord-sets': {
+    names: ['Костюм с юбкой', 'Костюм брючный', 'Комплект топ и брюки', 'Комплект рубашка и шорты', 'Костюм льняной', 'Комплект вязаный', 'Костюм с жилетом', 'Комплект спортивный', 'Костюм деловой', 'Комплект пляжный'],
+    images: ['/images/cat-women-coords.webp', '/images/cat-women-pants.webp'],
+    priceRange: [3999, 7999],
   },
-  {
-    id: 'BF2611414200',
-    name: 'Кардиган вязаный оверсайз',
-    price: 3499,
-    image: '/images/cat-women-knitwear.webp',
-    colors: 3,
-    badge: null,
-    category: 'vyazanyy-trikotazh',
-    sizes: ['S', 'M', 'L', 'XL'],
+  'zen-aksessuary': {
+    names: ['Пояс для чулок кружевной на завязках', 'Лоферы кожаные на низком каблуке', 'Сумка через плечо', 'Ремень кожаный', 'Шарф шерстяной', 'Перчатки кожаные', 'Шапка вязаная', 'Очки солнцезащитные', 'Колье', 'Браслет'],
+    images: ['/images/prod-belt.webp', '/images/prod-loafers.webp', '/images/cat-women-accessories.webp'],
+    priceRange: [999, 5999],
   },
-  {
-    id: 'BF2611414300',
-    name: 'Пальто шерстяное двубортное',
-    price: 12999,
-    image: '/images/cat-women-outerwear.webp',
-    colors: 2,
-    badge: 'new',
-    category: 'verkhnaya-odezhda',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-  },
-  {
-    id: 'BF2611414400',
-    name: 'Пижама шелковая с кружевом',
-    price: 4499,
-    image: '/images/hero-zen-sale.webp',
-    colors: 3,
-    badge: null,
-    category: 'domashnyaya-odezhda',
-    sizes: ['XS', 'S', 'M', 'L'],
-  },
-];
+};
 
-// Men's products
-export const menProducts: Product[] = [
-  {
-    id: 'M-BF2611411001',
-    name: 'Куртка кожаная бомбер',
-    price: 8999,
-    image: '/images/cat-men-outerwear.webp',
-    colors: 2,
-    badge: 'hit',
-    category: 'verkhnaya-odezhda',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+const generateProducts = (templates: typeof womenProductTemplates, gender: 'women' | 'men', prefix: string): Product[] => {
+  const products: Product[] = [];
+  const badges: (null | 'hit' | 'new')[] = [null, null, null, 'hit', 'new'];
+  const sizes = gender === 'women'
+    ? ['XS', 'S', 'M', 'L', 'XL']
+    : ['S', 'M', 'L', 'XL', 'XXL'];
+
+  Object.entries(templates).forEach(([category, template]) => {
+    for (let i = 0; i < 50; i++) {
+      const nameIndex = i % template.names.length;
+      const imageIndex = i % template.images.length;
+      const priceVariation = Math.floor((template.priceRange[1] - template.priceRange[0]) * (i % 10) / 10);
+      const price = template.priceRange[0] + priceVariation;
+
+      products.push({
+        id: `${prefix}${category.toUpperCase().slice(0, 3)}${String(i + 1).padStart(3, '0')}`,
+        name: template.names[nameIndex],
+        price: price,
+        image: template.images[imageIndex],
+        colors: (i % 5) + 1,
+        badge: badges[i % badges.length],
+        category: category,
+        sizes: sizes,
+      });
+    }
+  });
+
+  return products;
+};
+
+export const womenProducts: Product[] = generateProducts(womenProductTemplates, 'women', 'W-');
+
+// Men's products - 50 per category
+const menProductTemplates: Record<string, { names: string[]; images: string[]; priceRange: [number, number] }> = {
+  'verkhnaya-odezhda': {
+    names: ['Куртка кожаная бомбер', 'Пуховик мужской', 'Парка утепленная', 'Ветровка спортивная', 'Куртка джинсовая', 'Пальто мужское', 'Жилет утепленный', 'Бомбер нейлоновый', 'Тренч мужской', 'Куртка стеганая'],
+    images: ['/images/cat-men-outerwear.webp'],
+    priceRange: [5999, 12999],
   },
-  {
-    id: 'M-BF2611411002',
-    name: 'Брюки чинос классические',
-    price: 3499,
-    image: '/images/cat-men-pants.webp',
-    colors: 4,
-    badge: null,
-    category: 'bryuki',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+  'bryuki': {
+    names: ['Брюки чинос классические', 'Брюки карго', 'Брюки спортивные', 'Брюки льняные', 'Брюки зауженные', 'Брюки прямые', 'Брюки укороченные', 'Брюки с защипами', 'Джоггеры', 'Брюки широкие'],
+    images: ['/images/cat-men-pants.webp'],
+    priceRange: [2499, 4999],
   },
-  {
-    id: 'M-BF2611411003',
-    name: 'Футболка базовая хлопковая',
-    price: 1499,
-    image: '/images/cat-men-tshirts.webp',
-    colors: 6,
-    badge: 'hit',
-    category: 'futbolki-i-longslivy',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+  'futbolki-i-longslivy': {
+    names: ['Футболка базовая хлопковая', 'Футболка с принтом', 'Лонгслив базовый', 'Поло классическое', 'Футболка оверсайз', 'Майка спортивная', 'Футболка с воротником', 'Лонгслив с графикой', 'Футболка облегающая', 'Футболка с карманом'],
+    images: ['/images/cat-men-tshirts.webp'],
+    priceRange: [999, 2499],
   },
-  {
-    id: 'M-BF2611411004',
-    name: 'Свитер вязаный с горлом',
-    price: 3999,
-    image: '/images/cat-men-knitwear.webp',
-    colors: 3,
-    badge: 'new',
-    category: 'trikotazh',
-    sizes: ['S', 'M', 'L', 'XL'],
+  'trikotazh': {
+    names: ['Свитер вязаный с горлом', 'Джемпер мужской', 'Кардиган на пуговицах', 'Пуловер с V-вырезом', 'Водолазка мужская', 'Свитер с косами', 'Джемпер укороченный', 'Свитер с узором', 'Жилет вязаный', 'Кофта на молнии'],
+    images: ['/images/cat-men-knitwear.webp'],
+    priceRange: [2999, 5999],
   },
-  {
-    id: 'M-BF2611411005',
-    name: 'Джинсы слим темные',
-    price: 4499,
-    image: '/images/cat-men-jeans.webp',
-    colors: 2,
-    badge: 'hit',
-    category: 'dzhinsy',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+  'dzhinsy': {
+    names: ['Джинсы слим темные', 'Джинсы прямые', 'Джинсы зауженные', 'Джинсы классические', 'Джинсы с потертостями', 'Джинсы широкие', 'Джинсы укороченные', 'Джинсы baggy', 'Джинсы светлые', 'Джинсы черные'],
+    images: ['/images/cat-men-jeans.webp'],
+    priceRange: [2999, 5499],
   },
-  {
-    id: 'M-BF2611411006',
-    name: 'Рубашка льняная классическая',
-    price: 2999,
-    image: '/images/cat-men-shirts.webp',
-    colors: 5,
-    badge: null,
-    category: 'rubashki',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+  'rubashki': {
+    names: ['Рубашка льняная классическая', 'Рубашка хлопковая', 'Рубашка в клетку', 'Рубашка джинсовая', 'Рубашка с принтом', 'Рубашка оверсайз', 'Рубашка приталенная', 'Рубашка с коротким рукавом', 'Рубашка белая', 'Рубашка черная'],
+    images: ['/images/cat-men-shirts.webp'],
+    priceRange: [1999, 3999],
   },
-];
+};
+
+export const menProducts: Product[] = generateProducts(menProductTemplates, 'men', 'M-');
 
 // Cities list
 export const cities: City[] = [
