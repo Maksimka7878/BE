@@ -24,13 +24,13 @@ export function CategoryGrid({ categories, basePath }: CategoryGridProps) {
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              
+
               {/* Overlay */}
               <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
-              
+
               {/* Category Name */}
               <div className="absolute inset-0 flex items-center justify-center p-4">
-                <h3 className="text-white text-xs md:text-sm font-medium text-center lowercase tracking-wider drop-shadow-lg">
+                <h3 className="text-white text-sm md:text-base font-bold text-center uppercase tracking-widest drop-shadow-lg">
                   {category.name}
                 </h3>
               </div>

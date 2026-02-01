@@ -70,14 +70,14 @@ export function Header() {
               <div className="flex items-center gap-4 md:gap-6">
                 <button
                   onClick={() => handleGenderClick('women')}
-                  className={`text-xs md:text-sm font-medium tracking-wider transition-colors lowercase ${isWomenPage ? 'text-black' : 'text-gray-400 hover:text-black'
+                  className={`text-[13px] font-bold uppercase tracking-wider transition-colors ${isWomenPage ? 'text-black' : 'text-gray-400 hover:text-black'
                     }`}
                 >
                   женское
                 </button>
                 <button
                   onClick={() => handleGenderClick('men')}
-                  className={`text-xs md:text-sm font-medium tracking-wider transition-colors lowercase ${isMenPage ? 'text-black' : 'text-gray-400 hover:text-black'
+                  className={`text-[13px] font-bold uppercase tracking-wider transition-colors ${isMenPage ? 'text-black' : 'text-gray-400 hover:text-black'
                     }`}
                 >
                   мужское
@@ -86,7 +86,7 @@ export function Header() {
 
               {/* Center - Logo */}
               <Link to="/" className="absolute left-1/2 transform -translate-x-1/2">
-                <span className="text-xl md:text-2xl font-bold tracking-[0.2em]">BEFREE</span>
+                <span className="text-2xl md:text-3xl font-bold tracking-[0.2em]">BEFREE</span>
               </Link>
 
               {/* Right - Actions */}
@@ -94,7 +94,7 @@ export function Header() {
                 {/* City Selector - Desktop */}
                 <button
                   onClick={() => setIsCityModalOpen(true)}
-                  className="hidden md:flex items-center gap-1 text-xs md:text-sm hover:opacity-70 transition-opacity"
+                  className="hidden md:flex items-center gap-1 text-[13px] uppercase tracking-wide hover:opacity-70 transition-opacity font-medium"
                 >
                   <span>{selectedCity}</span>
                   <ChevronDown className="w-3 h-3" />
@@ -149,7 +149,7 @@ export function Header() {
                 <Link
                   key={category.id}
                   to={`/${isMenPage ? 'muzhskaya' : 'zhenskaya'}/${category.slug}`}
-                  className="text-xs lg:text-sm font-medium lowercase tracking-wider text-gray-700 hover:text-black whitespace-nowrap transition-colors"
+                  className="text-[13px] font-bold uppercase tracking-wider text-gray-900 hover:text-black whitespace-nowrap transition-colors"
                 >
                   {category.name}
                 </Link>
